@@ -36,14 +36,16 @@ def histogram_equalization(image):
     g_equalized = cv2.equalizeHist(g)
     b_equalized = cv2.equalizeHist(b)
 
-    equalized_image = cv2.merge([r_equalized, g_equalized, b_equalized])
+    equalized_image_array = cv2.merge([r_equalized, g_equalized, b_equalized])
 
     # Hitung histogram setelah equalization
     equalized_r_hist = cv2.calcHist([r_equalized], [0], None, [256], [0, 256])
     equalized_g_hist = cv2.calcHist([g_equalized], [0], None, [256], [0, 256])
     equalized_b_hist = cv2.calcHist([b_equalized], [0], None, [256], [0, 256])
 
-    return Image.fromarray(equalized_image), equalized_r_hist, equalized_g_hist, equalized_b_hist
+    equalized_image = Image.fromarray(equalized_image_array)
+
+    return equalized_image, equalized_r_hist, equalized_g_hist, equalized_b_hist
 
 
 # Contrast Stretching
